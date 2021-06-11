@@ -30,4 +30,26 @@ public class Controller {
     return false;
   }
 
+  public static boolean addData(String id, String nameItem, String category, String user, JFrame frame) {
+    try {
+      Connection myCon = Mysql.getConnection();
+      String query = "INSERT INTO data (id, nameItem, category, user)" + " values (?, ?, ?, ?)";
+
+      PreparedStatement preparedStatement = myCon.prepareStatement(query);
+
+      preparedStatement.setString(1, id);
+      preparedStatement.setString(2, nameItem);
+      preparedStatement.setString(3, category);
+      preparedStatement.setString(4, user);
+
+      preparedStatement.execute();
+
+      return true;
+
+    } catch (Exception error) {
+      JOptionPane.showMessageDialog(frame, "Informasi salah");
+    }
+    return false;
+  }
+
 }
