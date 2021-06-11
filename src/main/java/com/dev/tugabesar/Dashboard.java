@@ -5,8 +5,13 @@
  */
 package com.dev.tugabesar;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +27,27 @@ public class Dashboard extends javax.swing.JFrame {
 
         privilegeLabel.setText(Sesi.Privilege);
         usernameLabel.setText(Sesi.Username);
+
+        try {
+            Connection myCon = Mysql.getConnection();
+            String query = "SELECT * FROM data";
+            PreparedStatement preparedStatement = myCon.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String coulmn1 = resultSet.getString(1);
+                String coulmn2 = resultSet.getString(2);
+                String coulmn3 = resultSet.getString(3);
+                String coulmn4 = resultSet.getString(4);
+
+                String allCoulmn[] = { coulmn1, coulmn2, coulmn3, coulmn4 };
+                DefaultTableModel model = (DefaultTableModel) tableInventory.getModel();
+                model.addRow(allCoulmn);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -32,6 +58,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     // @SuppressWarnings("unchecked")
 
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
@@ -49,7 +76,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableInventory = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -135,12 +162,16 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Inventori");
 
-        jTable1.setBackground(new java.awt.Color(153, 153, 153));
-        jTable1.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] { { null, null, null, null }, { null, null, null, null }, { null, null, null, null },
-                        { null, null, null, null }, { null, null, null, null } },
-                new String[] { "Id", "Nama barang", "Kategori", "User" }) {
+        tableInventory.setBackground(new java.awt.Color(153, 153, 153));
+        tableInventory.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+
+        tableInventory.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+                // {null, null, null, null},
+                // {null, null, null, null},
+                // {null, null, null, null},
+                // {null, null, null, null},
+                // {null, null, null, null}
+        }, new String[] { "Id", "Nama barang", "Kategori", "User" }) {
             Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.String.class,
                     java.lang.String.class };
             boolean[] canEdit = new boolean[] { false, true, true, true };
@@ -153,8 +184,8 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit[columnIndex];
             }
         });
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        tableInventory.setShowGrid(true);
+        jScrollPane1.setViewportView(tableInventory);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
@@ -322,7 +353,12 @@ public class Dashboard extends javax.swing.JFrame {
             String user = Sesi.Username;
 
             if (Controller.addData(id, nameItem, category, user, this)) {
+                DefaultTableModel model = (DefaultTableModel) tableInventory.getModel();
                 JOptionPane.showMessageDialog(this, "Success");
+                model.setRowCount(0);
+                JFrame dashboard = new Dashboard();
+                dashboard.setVisible(false);
+                dashboard.setVisible(true);
             }
 
         } catch (Exception error) {
@@ -400,9 +436,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel logoutButton;
     private javax.swing.JLabel privilegeLabel;
+    private javax.swing.JTable tableInventory;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
