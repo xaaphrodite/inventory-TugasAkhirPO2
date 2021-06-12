@@ -3,6 +3,7 @@ package com.dev.tugabesar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -43,11 +44,29 @@ public class Controller {
       preparedStatement.setString(4, user);
 
       preparedStatement.execute();
+      preparedStatement.close();
 
       return true;
 
     } catch (Exception error) {
       JOptionPane.showMessageDialog(frame, "Informasi salah");
+    }
+    return false;
+  }
+
+  public static boolean deleteData(String id, JFrame frame) throws Exception {
+    try {
+      Connection myCon = Mysql.getConnection();
+      String query = "DELETE FROM data WHERE id = ?";
+      PreparedStatement preparedStatement = myCon.prepareStatement(query);
+
+      preparedStatement.setString(1, id);
+      preparedStatement.executeUpdate();
+      preparedStatement.close();
+
+      return true;
+    } catch (SQLException error) {
+      JOptionPane.showMessageDialog(frame, error.getMessage());
     }
     return false;
   }
