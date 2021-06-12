@@ -28,6 +28,7 @@ public class Dashboard extends javax.swing.JFrame {
         privilegeLabel.setText(Sesi.Privilege);
         usernameLabel.setText(Sesi.Username);
         addPanel.setVisible(false);
+        backButton.setVisible(false);
 
         try {
             Connection myCon = Mysql.getConnection();
@@ -66,6 +67,7 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -84,16 +86,16 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         formId = new javax.swing.JTextField();
-        editButton = new javax.swing.JButton();
-        addButton = new javax.swing.JButton();
+        optionButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         addPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         formItem = new javax.swing.JTextField();
         formCategory = new javax.swing.JTextField();
-        saveBackButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -172,10 +174,10 @@ public class Dashboard extends javax.swing.JFrame {
         tableInventory.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         tableInventory.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-        }, new String[] { "Id", "Nama barang", "Kategori", "User" }) {
+        }, new String[] { "Id", "Nama barang", "Kategori", "Hak istimewa" }) {
             Class[] types = new Class[] { java.lang.Integer.class, java.lang.String.class, java.lang.String.class,
                     java.lang.String.class };
-            boolean[] canEdit = new boolean[] { false, true, true, true };
+            boolean[] canEdit = new boolean[] { false, false, false, false };
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -205,27 +207,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        editButton.setText("Ubah data");
-        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        optionButton.setText("Ubah/Tambah");
+        optionButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                editButtonMouseClicked(evt);
-            }
-        });
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
-
-        addButton.setText("Tambah");
-        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addButtonMouseClicked(evt);
-            }
-        });
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                optionButtonMouseClicked(evt);
             }
         });
 
@@ -246,17 +231,17 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Kategori");
 
-        saveBackButton.setText("Kembali");
-        saveBackButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        editButton.setText("Ubah");
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                saveBackButtonMouseClicked(evt);
+                editButtonMouseClicked(evt);
             }
         });
 
-        saveButton.setText("Simpan");
-        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        addButton.setText("Tambah");
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                saveButtonMouseClicked(evt);
+                addButtonMouseClicked(evt);
             }
         });
 
@@ -268,15 +253,16 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGroup(addPanelLayout.createSequentialGroup().addComponent(jLabel6).addGap(18, 18, 18)
                                 .addComponent(formItem, javax.swing.GroupLayout.PREFERRED_SIZE, 152,
                                         javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(addPanelLayout.createSequentialGroup().addComponent(saveButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(saveBackButton))
-                                .addGroup(
-                                        addPanelLayout.createSequentialGroup().addComponent(jLabel7).addGap(48, 48, 48)
-                                                .addComponent(formCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 152,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 21, Short.MAX_VALUE)));
+                        .addGroup(addPanelLayout.createSequentialGroup().addComponent(jLabel7).addGap(48, 48, 48)
+                                .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                addPanelLayout.createSequentialGroup().addComponent(editButton)
+                                                        .addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(addButton))
+                                        .addComponent(formCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 152,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 285, Short.MAX_VALUE)));
         addPanelLayout.setVerticalGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(addPanelLayout.createSequentialGroup().addContainerGap()
                         .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -289,8 +275,15 @@ public class Dashboard extends javax.swing.JFrame {
                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(addPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(saveBackButton).addComponent(saveButton))
+                                .addComponent(editButton).addComponent(addButton))
                         .addContainerGap(17, Short.MAX_VALUE)));
+
+        backButton.setText("Kembali");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -299,45 +292,51 @@ public class Dashboard extends javax.swing.JFrame {
                         .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jScrollPane1)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING,
                                 javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                jPanel4Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(editButton))
                         .addGroup(jPanel4Layout.createSequentialGroup().addGroup(jPanel4Layout
                                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel4)
                                 .addComponent(jLabel2)
-                                .addComponent(addPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel4Layout.createSequentialGroup().addComponent(jLabel5).addGap(84, 84, 84)
                                         .addComponent(formId, javax.swing.GroupLayout.PREFERRED_SIZE, 152,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(deleteButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(addButton)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(optionButton)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(addPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backButton)))
                         .addContainerGap()));
         jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup().addContainerGap().addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(editButton)
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 2,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
-                                .addComponent(formId, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(deleteButton).addComponent(addButton))
-                        .addGap(18, 18, 18)
-                        .addComponent(addPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(31, Short.MAX_VALUE)));
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 2,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel4Layout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabel5)
+                                                .addComponent(formId, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(deleteButton).addComponent(optionButton))
+                                        .addGap(18, 18, 18).addComponent(addPanel,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(backButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -364,19 +363,15 @@ public class Dashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_addButtonActionPerformed
-
-    private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_saveButtonMouseClicked
+    private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_saveButtonMouseClicked
         try {
             String id = formId.getText();
             String nameItem = formItem.getText();
             String category = formCategory.getText();
-            String user = Sesi.Username;
+            String privilege = Sesi.Privilege;
 
-            if (Controller.addData(id, nameItem, category, user, this)) {
-                JOptionPane.showMessageDialog(this, "Data berhasil disimpan:D");
+            if (Controller.addData(id, nameItem, category, privilege, this)) {
+                JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
                 JFrame dashboard = new Dashboard();
                 dashboard.setVisible(false);
                 this.dispose();
@@ -388,22 +383,20 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_saveButtonMouseClicked
 
-    private void saveBackButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_saveBackButtonMouseClicked
-        addButton.setVisible(true);
+    private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_saveBackButtonMouseClicked
+        optionButton.setVisible(true);
         addPanel.setVisible(false);
+        backButton.setVisible(false);
     }// GEN-LAST:event_saveBackButtonMouseClicked
 
     private void formIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_formIdActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_formIdActionPerformed
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editButtonActionPerformed
-        JOptionPane.showMessageDialog(this, "Data terhapus");
-    }// GEN-LAST:event_editButtonActionPerformed
-
-    private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_addButtonMouseClicked
-        addButton.setVisible(false);
+    private void optionButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_addButtonMouseClicked
+        optionButton.setVisible(false);
         addPanel.setVisible(true);
+        backButton.setVisible(true);
     }// GEN-LAST:event_addButtonMouseClicked
 
     private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_deleteButtonMouseClicked
@@ -414,22 +407,34 @@ public class Dashboard extends javax.swing.JFrame {
         if (question == JOptionPane.YES_OPTION) {
             try {
                 if (Controller.deleteData(id, this)) {
-                    JOptionPane.showMessageDialog(this, "Data terhapus");
-
                     JFrame dashboard = new Dashboard();
                     dashboard.setVisible(false);
                     this.dispose();
                     dashboard.setVisible(true);
                 }
             } catch (Exception error) {
-                JOptionPane.showMessageDialog(this, error.getMessage());
+                JOptionPane.showMessageDialog(this, "Masukan data dengan benar!");
             }
         }
 
     }// GEN-LAST:event_deleteButtonMouseClicked
 
     private void editButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_editButtonMouseClicked
-        // TODO add your handling code here:
+        try {
+            String id = formId.getText();
+            String nameItem = formItem.getText();
+            String category = formCategory.getText();
+
+            if (!id.equals("") && Controller.updateData(id, nameItem, category, this)) {
+                JOptionPane.showMessageDialog(this, "Data berhasil diubah");
+                JFrame dashboard = new Dashboard();
+                dashboard.setVisible(false);
+                this.dispose();
+                dashboard.setVisible(true);
+            }
+        } catch (Exception error) {
+            JOptionPane.showMessageDialog(this, "Masukan data dengan benar");
+        }
     }// GEN-LAST:event_editButtonMouseClicked
 
     private void logoutButtonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_logoutButtonMouseClicked
@@ -478,6 +483,7 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JPanel addPanel;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JTextField formCategory;
@@ -496,9 +502,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logoutButton;
+    private javax.swing.JButton optionButton;
     private javax.swing.JLabel privilegeLabel;
-    private javax.swing.JButton saveBackButton;
-    private javax.swing.JButton saveButton;
     private javax.swing.JTable tableInventory;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
